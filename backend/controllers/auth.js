@@ -96,24 +96,24 @@ module.exports = {
     // res.redirect("/")
   },
 
-  // googleOAuth: async (req, res, next) => {
-  //   // Generate token
-  //   const token = signToken(req.user);
-  //   // console.log(req.user);
-  //   // res.status(200).json({ token });
-  //   // res.cookie("jwt_access_token", token, {
-  //   //   // expires: new Date(Date.now() + 300000),
-  //   //   // secure: true,
-  //   //   // httpOnly: true,
-  //   // });
-  //   res.json({
-  //       success : true,
-  //       method : "google",
-  //       token : token,
-  //       message : "You have successfully logged in through your google account"
-  //   })
-  //   // res.redirect("/")
-  // }
+  googleOAuth: async (req, res, next) => {
+    // Generate token
+    const token = signToken(req.user);
+    // console.log(req.user);
+    // res.status(200).json({ token });
+    // res.cookie("jwt_access_token", token, {
+    //   // expires: new Date(Date.now() + 300000),
+    //   // secure: true,
+    //   // httpOnly: true,
+    // });
+    res.json({
+        success : true,
+        method : "google",
+        token : token,
+        message : "You have successfully logged in through your google account"
+    })
+    // res.redirect("/")
+  }
 
   
 }

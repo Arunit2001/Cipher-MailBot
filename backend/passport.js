@@ -42,40 +42,39 @@ passport.use(new JwtStrategy({
 }));
 
 // Google OAuth Strategy
-// passport.use('googleToken', new GooglePlusTokenStrategy({
-//   callbackURL: 'http:localhost:3000/users/oauth/google/redirect',
-//   clientID: config.oauth.google.clientID,
-//   clientSecret: config.oauth.google.clientSecret
-// }, async (accessToken, refreshToken, profile, done) => {
-//   // console.log(profile);
-//   // return done(null, profile);
-//   try {
-//     // Should have full user profile over here
-//     // console.log('profile', profile);
-//     // console.log('accessToken', accessToken);
-//     // console.log('refreshToken', refreshToken);
+passport.use('googleToken', new GooglePlusTokenStrategy({
+  callbackURL: 'http://localhost:5000/user/oauth/google/redirect',
+  clientID: process.env.clientID,
+  clientSecret: process.env.clientSecret
+}, async (accessToken, refreshToken, profile, done) => {
+  // console.log(profile);
+  // return done(null, profile);
+  try {
+    // Should have full user profile over here
+    // console.log('profile', profile);
+    // console.log('accessToken', accessToken);
+    // console.log('refreshToken', refreshToken);
     
-//     const existingUser = await User.findOne({ "google.id": profile.id });
-//     if (existingUser) {
-//       return done(null, existingUser);
-//     }
+    const existingUser = await User.findOne({ "google.id": profile.id });
+    if (existingUser) {
+      return done(null, existingUser);
+    }
 
-//     const newUser = new User({
-//       method: 'google',
-//       name: profile.displayName,
-//       role : "student",
-//       createdAt: new Date().getTime(),
-//       google: {
-//         id: profile.id,
-//         email: profile.emails[0].value
-//       }
-//     });
-//     await newUser.save();
-//     done(null, newUser);
-//   } catch(error) {
-//     done(error, false, error.message);
-//   }
-// }));
+    const newUser = new User({
+      method: 'google',
+      name: profile.displayName,
+      createdAt: new Date().getTime(),
+      google: {
+        id: profile.id,
+        email: profile.emails[0].value
+      }
+    });
+    await newUser.save();
+    done(null, newUser);
+  } catch(error) {
+    done(error, false, error.message);
+  }
+}));
 
 // LOCAL STRATEGY
 passport.use(new LocalStrategy({

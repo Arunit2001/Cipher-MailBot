@@ -13,9 +13,9 @@ router.post('/signup', isNotLoggedIn, authController.signUp);
 
 router.post('/signin', isNotLoggedIn, passportSignIn, authController.signIn);
 
-// router.get('/oauth/google', isNotLoggedIn, passport.authenticate('googleToken', {scope: ['profile', 'email']}));
+router.get('/oauth/google', isNotLoggedIn, passport.authenticate('googleToken', {scope: ['profile', 'email']}));
 
-// router.get("/oauth/google/redirect", isNotLoggedIn, passport.authenticate('googleToken', {failureRedirect: ''}), authController.googleOAuth);
+router.get("/oauth/google/redirect", isNotLoggedIn, passport.authenticate('googleToken', {failureRedirect: ''}), authController.googleOAuth);
 
 router.get("/logout", isLoggedIn, function(req, res){
     // req.session = null;
