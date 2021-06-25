@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Sign In and SIgn Up</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="hero">
+            <div class="form-box"><div>
+                    <div class="button-box">
+                        <div id="btn"></div>
+                        <button type="button" class="toggle-btn" onclick="signIn()">Sign In</button>
+                        <button type="button" class="toggle-btn" onclick="signUp()">Sign Up</button>
+                    </div>
+                    <div class="social-bar">Sign In with Google</div>
+                    <form id="signIn" class="input-group ">  
+                        <input type="text" class="input-field" placeholder="User Id" required>
+                        <input type="text" class="input-field" placeholder="Password" required>
+                        <input type="checkbox" class="check-box"><span>Remember Password</span>
+                        <button type="submit" class="submit-btn">Sign In</button>
+                    </form>
+                    <form id="signUp" class="input-group ">  
+                        <input type="text" class="input-field" placeholder="User Id" required>
+                        <input type="email" class="input-field" placeholder="Email Id" required>
+                        <input type="text" class="input-field" placeholder="Enter Passsword" required>
+                        <input type="checkbox" class="check-box"><span>I agree to the term and condition</span>
+                        <button type="submit" class="submit-btn">Sign Up</button>
+                    </form>
+            </div>
+        </div>
+        <script>
+            var x=document.getElementById("signIn");
+            var y=document.getElementById("signUp");
+            var z=document.getElementById("btn");
+            function signUp(){
+                x.style.left="-400px";
+                y.style.left="50px";
+                z.style.left="110px";
+            }
+            function signIn(){
+                x.style.left="50px";
+                y.style.left="450px";
+                z.style.left="0px";
+            }
+        </script>
+    </body>
+</html>
