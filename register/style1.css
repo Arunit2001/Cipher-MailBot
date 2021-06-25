@@ -34,9 +34,10 @@
     outline: none;
     position:relative;
 }
+
 #btn{
     top:0;
-    left: 0;
+    left: 110px;
     position:absolute;
     width:110px;
     height:100%;
@@ -44,7 +45,6 @@
     border-radius:30px;
     transition: 0.5s;
 }
-
 .social-bar{
     width: 50%;
     padding:10px 30px;
