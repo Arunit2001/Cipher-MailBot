@@ -23,11 +23,7 @@ router.get("/logout", isLoggedIn, function(req, res){
     res.clearCookie('jwt_access_token');
     // req.user = null;
     req.logout();
-    res.json({
-        success: true,
-        logout : true,
-        message : "You have been successfully Logged Out"
-    });
+    res.redirect("/");
   })
 
   router.get("/list", isLoggedIn, async (req, res)=>{
