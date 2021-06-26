@@ -95,7 +95,7 @@ module.exports = {
       // secure: true,
       // httpOnly: true,
     });
-    res.redirect("/user/list");
+    res.redirect("/dashboard/home");
   }
 
   
