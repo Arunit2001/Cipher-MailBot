@@ -78,6 +78,6 @@ app.get("/signup", (req, res)=>{
 app.use("/user", Auth);
 
 
-app.listen("5000", ()=>{
+app.listen(process.env.PORT || "5000", ()=>{
     console.log("Backend Started ....");
 })
