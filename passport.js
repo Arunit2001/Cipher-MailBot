@@ -43,7 +43,7 @@ passport.use(new JwtStrategy({
 
 // Google OAuth Strategy
 passport.use('googleToken', new GooglePlusTokenStrategy({
-  callbackURL: 'http://localhost:5000/user/oauth/google/redirect',
+  callbackURL: 'https://cipher-mailbot.herokuapp.com/user/oauth/google/redirect',
   clientID: process.env.clientID,
   clientSecret: process.env.clientSecret
 }, async (accessToken, refreshToken, profile, done) => {

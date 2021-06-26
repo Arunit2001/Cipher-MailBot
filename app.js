@@ -12,7 +12,6 @@ const {MongoClient} = require("mongodb");
 const isNotLoggedIn = require("./middlewares/isNotLoggedIn");
 const isLoggedIn = require("./middlewares/isLoggedIn.js");
 const app = express();
-const   cors = require("cors");
 require("./passport");
 
 mongoose.connect(process.env.mongoLink, { useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
@@ -26,27 +25,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-let whitelist = ["http://localhost:5000"];
-
-app.use(function (req, res, next) {
-  var allowedDomains = ["http://localhost:5000"];
-  var origin = req.headers.origin;
-  if (allowedDomains.indexOf(origin) !== -1) {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:5000");
-  }
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,POST,OPTIONS,PUT,PATCH,DELETE"
-  );
-
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type,Accept"
-  );
-
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
 
 app.use(
   session({
