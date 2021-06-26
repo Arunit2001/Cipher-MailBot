@@ -40,6 +40,12 @@ app.use(passport.session());
 
 app.use(express.static("assets"));
 
+app.use(function(req, res, next){
+	res.locals.nowUser = req.user
+	res.locals.isAuth = req.user ? true:false
+  next()
+})
+
 app.get("/", (req, res)=>{
     res.render("landing.ejs");
 })

@@ -36,7 +36,7 @@
                     password : document.getElementById("password").value
                 }
 
-                await fetch("https://cipher-mailbot.herokuapp.com/user/signin",{
+                await fetch("http://localhost:5000/user/signin",{
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -50,7 +50,7 @@
                     if(response.status>=200&&response.status<300){
                         document.getElementById("warning1").style.display="none";
                         response = await response.json();
-                        window.location.assign("https://cipher-mailbot.herokuapp.com/user/list");
+                        window.location.assign("http://localhost:5000/user/list");
                     }else if(response.status==401){
                         document.getElementById("warning1").style.display="block";
                     }
@@ -61,11 +61,11 @@
 
             const signinGoogle = async (e)=>{
                 e.preventDefault();
-                await fetch("https://cipher-mailbot.herokuapp.com/user/oauth/google")
+                await fetch("http://localhost:5000/user/oauth/google")
                 .then(async (response)=>{
                     if(response.status>=200&&response.status<300){
                         response = await response.json();
-                        window.location.assign("https://cipher-mailbot.herokuapp.com/user/list");
+                        window.location.assign("http://localhost:5000/user/list");
                     }else{
                         response = await response.json();
                         console.log(response);
