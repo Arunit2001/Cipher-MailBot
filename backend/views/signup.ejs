@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MailBot</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="stylesheet" href="/styles/signup.css">
+        <script src="https://kit.fontawesome.com/44c10b988f.js" crossorigin="anonymous" defer></script>
+    </head>
+    <body>
+        <div class="hero1">
+            <div class="form-box1">
+                    <div class="button-box1">
+                        <div id="btn1"></div>
+                        <a href="/login"><button type="button" class="toggle-btn1"  >Sign In</button></a>
+                        <button type="button" class="toggle-btn1"  >Sign Up</button>
+                    </div>
+                    <a href="/user/oauth/google"><div class="social-bar1" ><i class="fab fa-google"></i>&nbsp; &nbsp;Login via Google</div></a>
+                    <form id="signUp" class="input-group1" onsubmit="signupSubmit(event)" >  
+                        <input type="text" name="name" id="name" class="input-field1" placeholder="Username" required>
+                        <input type="email" name="email" id="email" class="input-field1" placeholder="Email Id" required>
+                        <input type="password" name="password" id="password" class="input-field1" placeholder="Enter Passsword" required>
+                        <input type="checkbox" class="check-box1"><span>I agree to the term and condition</span>
+                        <button type="submit" class="submit-btn1">Sign Up</button>
+                    </form>
+                    <div id="warning12"></div>
+            </div>
+
+        </div>
+
+        <script>
+            const signupSubmit = async (e)=>{
+                e.preventDefault();
+                console.log("i am here");
+                let data = {
+                    name : document.getElementById("name").value,
+                    email : document.getElementById("email").value,
+                    password : document.getElementById("password").value
+                }
+
+                let response = await fetch("http://localhost:5000/user/signup",{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        name : data.name,
+                        email : data.email,
+                        password : data.password
+                    }),
+                }).then(async (response) => {
+                    if(response.status>=200&&response.status<300){
+                        document.getElementById("warning12").textContent="";
+                        response = await response.json();
+                        window.location.assign("http://localhost:5000/login");
+                    }else {
+                        response = await response.json();
+                        document.getElementById("warning12").textContent=response.message;
+                    }
+                }).catch(error=>{
+                    console.log(error.message);
+                });
+            }
+
+            const signupGoogle = async (e)=>{
+                e.preventDefault();
+                await fetch("http://localhost:5000/user/oauth/google")
+                .then(async (response)=>{
+                    if(response.status>=200&&response.status<300){
+                        response = await response.json();
+                        window.location.assign("http://localhost:5000/user/list");
+                    }else{
+                        response = await response.json();
+                        console.log(response);
+                    }
+                }).catch(error=>{
+                    console.log(error.message);
+                });
+            }
+        </script>
+
+    </body>
+</html>

@@ -8,6 +8,7 @@ const authController = require('../controllers/auth');
 const cookieParser = require('cookie-parser');
 const passportSignIn = passport.authenticate('local', { session: true });
 const passportJWT = passport.authenticate('jwt', { session: false });
+const User = require("../models/user");
 
 router.post('/signup', isNotLoggedIn, authController.signUp);
 
@@ -27,6 +28,15 @@ router.get("/logout", isLoggedIn, function(req, res){
         logout : true,
         message : "You have been successfully Logged Out"
     });
+  })
+
+  router.get("/list", isLoggedIn, async (req, res)=>{
+    console.log(req.session);
+    let list = await User.find({});
+    res.json({
+      success : true,
+      list : list
+    })
   })
 
 module.exports = router;

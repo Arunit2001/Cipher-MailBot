@@ -58,6 +58,7 @@ module.exports = {
     // });
     // req.user = newUser;
     // req.isAuthenticated = true;
+    console.log(req.session);
     res.json({
         success : true,
         method : "local",
@@ -70,23 +71,12 @@ module.exports = {
     // Generate token
     // console.log(req.user)
     const token = signToken(req.user);
-    // res.status(200).json({ token });
-    // res.redirect("/users/secret");
-    // return token;
-    // res.set('Set-Cookie', `jwt_token=${token}; Max-Age=500000; HttpOnly; path=/`);
-    // res.redirect("/users/secret");
-    // res.status(200).send({ auth: true, token: token });
-    // res.set('Set-Cookie', `jwt_token=${token}; Max-Age=50000; HttpOnly; Path=/`);
-    // console.log(req.user);
-    // res.end("Success");
-    // res.cookie("jwt_access_token", token, {
-    //   // expires: new Date(Date.now() + 300000),
-    //   // secure: true,
-    //   // httpOnly: true,
-    // });
-    // req.isAuthenticated = true;
-    // successRedirect:"/users/secret"
-    // failureRedirect:"/users/login"
+    res.cookie("jwt_access_token", token, {
+      // expires: new Date(Date.now() + 300000),
+      // secure: true,
+      // httpOnly: true,
+    });
+    console.log(req.session);
     res.json({
         success : true,
         method : "local",
@@ -101,18 +91,12 @@ module.exports = {
     const token = signToken(req.user);
     // console.log(req.user);
     // res.status(200).json({ token });
-    // res.cookie("jwt_access_token", token, {
-    //   // expires: new Date(Date.now() + 300000),
-    //   // secure: true,
-    //   // httpOnly: true,
-    // });
-    res.json({
-        success : true,
-        method : "google",
-        token : token,
-        message : "You have successfully logged in through your google account"
-    })
-    // res.redirect("/")
+    res.cookie("jwt_access_token", token, {
+      // expires: new Date(Date.now() + 300000),
+      // secure: true,
+      // httpOnly: true,
+    });
+    res.redirect("/user/list");
   }
 
   
