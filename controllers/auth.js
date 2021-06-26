@@ -3,7 +3,6 @@ const JWT = require('jsonwebtoken');
 const User = require('../models/user');
 const passport = require('passport');
 
-
 signToken = user => {
   return JWT.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: new Date().setDate(new Date().getDate() + 1) // expires in 24 hours

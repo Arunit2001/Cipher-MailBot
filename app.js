@@ -11,6 +11,7 @@ const Auth = require("./routes/auth");
 const {MongoClient} = require("mongodb");
 const isNotLoggedIn = require("./middlewares/isNotLoggedIn");
 const isLoggedIn = require("./middlewares/isLoggedIn.js");
+const verifyToken = require("./middlewares/verifyToken.js");
 const app = express();
 require("./passport");
 
@@ -56,8 +57,15 @@ app.get("/login", (req, res)=>{
 app.get("/signup", (req, res)=>{
     res.render("signup.ejs");
 })
-
-
+app.get("/dashboard/home", isLoggedIn, verifyToken, (req, res)=>{
+  res.render("dashboardHome.ejs");
+})
+app.get("/dashboard/history", isLoggedIn, verifyToken, (req, res)=>{
+  res.render("dashboardHistory.ejs");
+})
+app.get("/dashboard/create", isLoggedIn, verifyToken, (req, res)=>{
+  res.render("dashboardCreate.ejs");
+})
 
 app.use("/user", Auth);
 

@@ -4,6 +4,7 @@ const passport = require('passport');
 const passportConf = require('../passport');
 const isNotLoggedIn = require("../middlewares/isNotLoggedIn");
 const isLoggedIn = require("../middlewares/isLoggedIn.js");
+const verifyToken = require("../middlewares/verifyToken.js");
 const authController = require('../controllers/auth');
 const cookieParser = require('cookie-parser');
 const passportSignIn = passport.authenticate('local', { session: true });
@@ -19,20 +20,9 @@ router.get('/oauth/google', isNotLoggedIn, passport.authenticate('googleToken', 
 router.get("/oauth/google/redirect", isNotLoggedIn, passport.authenticate('googleToken', {failureRedirect: ''}), authController.googleOAuth);
 
 router.get("/logout", isLoggedIn, function(req, res){
-    // req.session = null;
     res.clearCookie('jwt_access_token');
-    // req.user = null;
     req.logout();
     res.redirect("/");
-  })
-
-  router.get("/list", isLoggedIn, async (req, res)=>{
-    console.log(req.session);
-    let list = await User.find({});
-    res.json({
-      success : true,
-      list : list
-    })
   })
 
 module.exports = router;
