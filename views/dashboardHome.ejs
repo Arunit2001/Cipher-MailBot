@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/styles/header.css" />
     <script src="/scripts/header.js" defer></script>
     <link rel="stylesheet" href="/styles/dashboardHome.css" />
+    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
     
   </head>
 
@@ -34,11 +35,105 @@
   </div>
   
   <div class="content">
-    <h2>Responsive Sidebar Example</h2>
-    <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
-    <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
-    <h3>Resize the browser window to see the effect.</h3>
+        <div class="container">
+          <!-- <div class="row">
+              <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <label for="startDate">Start Date</label>
+                <input type="date" class="form-control" id="startDate" />
+              </div>
+              <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <label for="endDate">End Date</label>
+                <input type="date" class="form-control" id="endDate" />
+              </div>
+              <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <label for="to">To Email</label>
+                <input type="text" class="form-control" id="to" />
+              </div>
+              <div class="form-group col-6 pt-md-2 pt-2 d-flex justify-content-end">
+                <button
+                  id="filterButton"
+                  class="btn btn-sm btn-success"
+                  style="height: 2.5em; align-self: center"
+                >
+                  Apply Filter
+                </button>
+              </div>
+              <div class="form-group col-6 pt-md-2 pt-2 pl-md-2 ">
+                <button
+                  id="removeFilterButton"
+                  class="btn btn-sm btn-danger"
+                  style="height: 2.5em; align-self: center"
+                >
+                  Remove Filter
+                </button>
+              </div>
+        </div> -->
+
+        <% let arr = ["Only Once", "Every 20-30 sec", "Weekly", "Monthly", "Yearly"]; %>
+
+            <ul>
+              <% scheduleEmail.forEach((elements)=>{ %>
+              <li>
+                <div class="mail-history">
+                  <div class="dropdown">
+                      <details>
+                            
+                        <summary><b>To :</b> <%= elements.to %>  &ensp; <b>Sub :</b> <%= elements.subject %>   &ensp; <b>Date :</b> <%= elements.createdAt %>   &ensp; <b>Frequency :</b> <%= arr[elements.frequency]%></summary>  
+                        <div class="mail">
+                                            
+                          <p><b>From:</b> &nbsp;<%= elements.from.name %></p>
+                            <p><b>CreatedAt:</b> &nbsp;<%= elements.createdAt %></p>
+                            <p><b>To:</b> &nbsp;<%= elements.to %></p>
+                            <p><b>Sub:</b> &nbsp;<%= elements.subject %></p>
+                            <p><b>CC:</b>
+                              <% elements.cc.forEach((ele)=>{ %>
+                                <%= ele.email %>,&nbsp;
+                              <% }) %>
+                            </p>
+                            <div style="margin-left: 50px;">
+                              <%- elements.content %>
+                            </div>
+                          
+                        </div>
+                        <div class="modify">
+                            <button id="delete1" class="btn btn-sm btn-danger"  style="height: 2.5em; align-self: center" class="open-button" type="button" data-toggle="modal" data-target="#delete<%=elements.id%>">Delete</button>
+                            <button   class="btn btn-sm btn-success"
+                            style="height: 2.5em; align-self: center" type="button"><a style="color: white; text-decoration: none;" href="/schedule/edit/<%=elements.id%>">Edit</a></button>
+                          </div>
+                      </details>
+                      
+                  </div>
+                </div>
+
+                <div class="modal fade" id="delete<%=elements.id%>" tabindex="-1" role="dialog" aria-labelledby="deleteEmail" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteEmail">Delete Email</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure, You want to delete this email?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary"><a style="color: white; text-decoration: none;" href="/schedule/cancel/<%=elements.id%>">Delete</a></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <% }) %>
+            </ul>  
+                
+              
+          </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   
 </body>
 

@@ -1,21 +1,18 @@
 const passport = require('passport');
 const Email = require('../models/email');
+let alert = require("alert");
 
 
 async function isOwner(req, res, next) {
     await Email.findById(req.params.id, (err, email)=>{
         if(err){
-            res.json({
-                success : false,
-                message : "Email id does not exist."
-            });
+          alert('Given email id does not exist');
+          res.redirect("/dashboard/home");
         }
         if (email.from.id!=req.user.id) {
           // req.session = null;
-          res.json({
-              success : false,
-              message : "Unauthorized."
-          });
+          alert('You are unauthorized');
+          res.redirect("/dashboard/home");
         } else {
           next();
         }

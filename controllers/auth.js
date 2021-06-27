@@ -2,6 +2,7 @@ require("dotenv").config();
 const JWT = require('jsonwebtoken');
 const User = require('../models/user');
 const passport = require('passport');
+let alert = require("alert");
 
 signToken = user => {
   return JWT.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -19,6 +20,7 @@ module.exports = {
     // console.log(password);
     const foundUser = await User.findOne({ "local.email": email });
     if (foundUser) { 
+      alert("Email Already in use. please use another email id");
       return res.status(403).json({ 
           success : false,
           message: 'Email is already in use'

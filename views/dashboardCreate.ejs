@@ -106,9 +106,11 @@
       let cc = [];
       let k = document.getElementsByName("CC[]");
       k.forEach((element)=>{
-        let obj = {};
-        obj["email"] = element.value;
-        cc.push(obj);
+        if(element.value){
+          let obj = {};
+          obj["email"] = element.value;
+          cc.push(obj);
+        }
       })
       let data = {
         to : e.currentTarget.elements['to'].value,
@@ -117,24 +119,16 @@
         content : x,
         frequency : e.currentTarget.elements['frequency'].value
       }
-      // console.log(data);
-      await fetch("http://localhost:5000/schedule/email",{
+      console.log(data);
+      fetch("https://cipher-mailbot.herokuapp.com/schedule/email",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
         body: JSON.stringify(data),
-      }).then(async (response)=>{
-        // response = await response.json();
-        if(response.status>=200&&response.status<300){
-          window.location.href="http://localhost:5000/dashboard/home";
-        }else{
-          console.log("error happened");
-        }
-      }).catch((error)=>{
-        console.log(error.message);
       })
+      window.location.href="https://cipher-mailbot.herokuapp.com/dashboard/home";
     }
 </script>
 </body>

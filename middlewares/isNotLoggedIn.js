@@ -1,14 +1,13 @@
 const passport = require('passport');
+let alert = require("alert");
 
 function isNotLoggedIn(req, res, next) {
     if (!req.user) {
       // req.session = null;
       next();
     } else {
-      res.json({
-          success : false,
-          message : "You are already logged in."
-      });
+      alert('You are already logged in.')
+      res.redirect("/")
     }
   } 
 

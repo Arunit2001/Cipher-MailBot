@@ -31,7 +31,7 @@ const emailSchema = new Schema({
     recurring :{
         type : Boolean
     },
-  createdAt: Date
+  createdAt: String
 });
 
 const Email = mongoose.model('email', emailSchema);

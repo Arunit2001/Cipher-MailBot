@@ -27,15 +27,16 @@
 
   <%- include('./header') %>
 
-  <div class="sidebar">
+  <div class="sidebar" style="background-color: #f1f1f1;">
     <a href="/dashboard/home">Scheduled Mails</a>
     <a class="active" href="/dashboard/history">History</a>
     <a href="/dashboard/create">Create</a>
   </div>
   
+  <div class="upperLayer">
   <div class="content">
         <div class="container">
-          <div class="row">
+          <!-- <div class="row">
               <div class="form-group col-lg-4 col-md-4 col-sm-4">
                 <label for="startDate">Start Date</label>
                 <input type="date" class="form-control" id="startDate" />
@@ -66,85 +67,45 @@
                   Remove Filter
                 </button>
               </div>
-        </div>
+        </div> -->
 
             <ul>
-              <li>
-                <div class="mail-history">
-                  <div class="dropdown">
-                      <details>
-                            
-                        <summary>To: Sohail  &ensp; Sub: Project Meeting   &ensp; Date: 01/04/2021 </summary>  
-                        <div class="mail">
-                                            
-                          <p>From: Name</p>
-                          <p>Sent: 01 December 2020 12:00PM</p>
-                          <p>To: EmailAddress</p>
-                          <p>Subject: XYZ</p>
-                          <p>
-                            &ensp; &ensp; &ensp; Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Maxime libero ex obcaecati ea facilis tempora
-                            quibusdam asperiores accusamus consequatur dicta!
-                          </p>
-                          <a href="attachment.com" id="attachement"> Attachment File </a>
-                        </div>
-                      </details>
-
+              <% emailArr.forEach((elements)=>{ %>
+                <li>
+                  <div class="mail-history">
+                    <div class="dropdown">
+                        <details>
+                              
+                          <summary><b>To:</b> <%= elements.to %>  &ensp; <b>Sub:</b> <%= elements.subject %>   &ensp; <b>Date:</b> <%= elements.createdAt%> </summary>  
+                          <div class="mail">
+                                              
+                            <p><b>From:</b> &nbsp;<%= elements.from.name %></p>
+                            <p><b>Sent:</b> &nbsp;<%= elements.createdAt %></p>
+                            <p><b>To:</b> &nbsp;<%= elements.to %></p>
+                            <p><b>Sub:</b> &nbsp;<%= elements.subject %></p>
+                            <p><b>CC:</b>
+                              <% elements.cc.forEach((ele)=>{ %>
+                                <%= ele.email %>,&nbsp;
+                              <% }) %>
+                            </p>
+                            <div style="margin-left: 50px;">
+                              <%- elements.content %>
+                            </div>
+                            <!-- <a href="attachment.com" id="attachement"> Attachment File </a> -->
+                          </div>
+                        </details>
+  
+                    </div>
                   </div>
-                </div>
-              </li>    
+                </li>    
+              <% }) %>
 
-              <li>
-                <div class="mail-history">
-                  <div class="dropdown">
-                      <details>
-                            
-                        <summary>To: isheeka  &ensp; Sub: Meeting   &ensp; Date: 14/02/2021 </summary>  
-                        <div class="mail">
-                                            
-                          <p>From: Name</p>
-                          <p>Sent: 01 December 2020 12:00PM</p>
-                          <p>To: EmailAddress</p>
-                          <p>Subject: XYZ</p>
-                          <p>
-                            &ensp; &ensp; &ensp; Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Maxime libero ex obcaecati ea facilis tempora
-                            quibusdam asperiores accusamus consequatur dicta!
-                          </p>
-                          <a href="attachment.com" id="attachement"> Attachment File </a>
-                        </div>
-                      </details>
-
-                  </div>
-                </div>
-              </li>
-                <div class="mail-history">
-                  <div class="dropdown">
-                      <details>
-                            
-                        <summary>To: Ashi  &ensp; Sub: Internship   &ensp; Date: 01/10/2021 </summary>  
-                        <div class="mail">
-                                            
-                          <p>From: Name</p>
-                          <p>Sent: 01 December 2020 12:00PM</p>
-                          <p>To: EmailAddress</p>
-                          <p>Subject: XYZ</p>
-                          <p>
-                            &ensp; &ensp; &ensp; Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Maxime libero ex obcaecati ea facilis tempora
-                            quibusdam asperiores accusamus consequatur dicta!
-                          </p>
-                          <a href="attachment.com" id="attachement"> Attachment File </a>
-                        </div>
-                      </details>
-
-                  </div>
-              </div>
             </ul>  
                 
               
           </div>
   </div>
+</div>
   
   
 </body>

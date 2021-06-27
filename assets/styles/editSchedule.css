@@ -1,0 +1,19 @@
+    div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: fit-content;
+  }
+
+  .entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+
+.glyphicon
+{
+    font-size: 12px;
+}
+
+  @media screen and (max-width: 700px) {
+    div.content {margin-left: 0;}
+  }

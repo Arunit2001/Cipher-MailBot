@@ -1,12 +1,10 @@
 const passport = require('passport');
-
+let alert = require("alert");
 function isLoggedIn(req, res, next) {
     if (!req.user) {
       // req.session = null;
-      res.json({
-          success : false,
-          message : "Please LogIn first."
-      });
+      alert("Please login First");
+      res.redirect("/login");
     } else {
       next();
     }

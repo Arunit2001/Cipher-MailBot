@@ -1,3 +1,4 @@
+
 .sidebar {
     margin: 0;
     padding: 0;
@@ -24,7 +25,8 @@
     background-color: #555;
     color: white;
   }
-  
+
+
   div.content {
     margin-left: 200px;
     padding: 15px 16px;
