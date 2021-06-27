@@ -26,8 +26,7 @@
           <br />
           <ul>
             <li><a class="lead" href="#">Home</a></li>
-            <li><a class="lead" href="#">About Us</a></li>
-            <li><a class="lead" href="#">How to Contact Us?</a></li>
+            <li><a class="lead" href="#what-we-do">Features</a></li>
           </ul>
         </div>
         <div class="col-sm-4">
@@ -39,7 +38,11 @@
             <div class="mb-3" id="subscribe">
              
             </div>
-           <button class="btn btn-primary">Switch Account</button> <br/>
+            <% if(!isAuth){ %>
+              <button class="btn btn-primary"><a href="/login" style="text-decoration: none; color: white;">Switch Account</a></button> <br/>
+              <% } else{ %>
+                <button class="btn btn-primary"><a href="/user/logout" style="text-decoration: none; color: white;">Switch Account</a></button> <br/>
+                <% } %>
           </form>
         </div>
       </div>
