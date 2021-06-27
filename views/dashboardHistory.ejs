@@ -21,7 +21,7 @@
     />
     <link rel="stylesheet" href="/styles/header.css" />
     <script src="/scripts/header.js" defer></script>
-    <link rel="stylesheet" href="/styles/dashboardCreate.css" />
+    <link rel="stylesheet" href="/styles/dashboardHistory.css" />
     
   </head>
 
@@ -34,10 +34,116 @@
   </div>
   
   <div class="content">
-    <h2>Responsive Sidebar Example</h2>
-    <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
-    <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
-    <h3>Resize the browser window to see the effect.</h3>
+        <div class="container">
+          <div class="row">
+              <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <label for="startDate">Start Date</label>
+                <input type="date" class="form-control" id="startDate" />
+              </div>
+              <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <label for="endDate">End Date</label>
+                <input type="date" class="form-control" id="endDate" />
+              </div>
+              <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <label for="to">To Email</label>
+                <input type="text" class="form-control" id="to" />
+              </div>
+              <div class="form-group col-6 pt-md-2 pt-2 d-flex justify-content-end">
+                <button
+                  id="filterButton"
+                  class="btn btn-sm btn-success"
+                  style="height: 2.5em; align-self: center"
+                >
+                  Apply Filter
+                </button>
+              </div>
+              <div class="form-group col-6 pt-md-2 pt-2 pl-md-2 ">
+                <button
+                  id="removeFilterButton"
+                  class="btn btn-sm btn-danger"
+                  style="height: 2.5em; align-self: center"
+                >
+                  Remove Filter
+                </button>
+              </div>
+        </div>
+
+            <ul>
+              <li>
+                <div class="mail-history">
+                  <div class="dropdown">
+                      <details>
+                            
+                        <summary>To: Sohail  &ensp; Sub: Project Meeting   &ensp; Date: 01/04/2021 </summary>  
+                        <div class="mail">
+                                            
+                          <p>From: Name</p>
+                          <p>Sent: 01 December 2020 12:00PM</p>
+                          <p>To: EmailAddress</p>
+                          <p>Subject: XYZ</p>
+                          <p>
+                            &ensp; &ensp; &ensp; Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Maxime libero ex obcaecati ea facilis tempora
+                            quibusdam asperiores accusamus consequatur dicta!
+                          </p>
+                          <a href="attachment.com" id="attachement"> Attachment File </a>
+                        </div>
+                      </details>
+
+                  </div>
+                </div>
+              </li>    
+
+              <li>
+                <div class="mail-history">
+                  <div class="dropdown">
+                      <details>
+                            
+                        <summary>To: isheeka  &ensp; Sub: Meeting   &ensp; Date: 14/02/2021 </summary>  
+                        <div class="mail">
+                                            
+                          <p>From: Name</p>
+                          <p>Sent: 01 December 2020 12:00PM</p>
+                          <p>To: EmailAddress</p>
+                          <p>Subject: XYZ</p>
+                          <p>
+                            &ensp; &ensp; &ensp; Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Maxime libero ex obcaecati ea facilis tempora
+                            quibusdam asperiores accusamus consequatur dicta!
+                          </p>
+                          <a href="attachment.com" id="attachement"> Attachment File </a>
+                        </div>
+                      </details>
+
+                  </div>
+                </div>
+              </li>
+                <div class="mail-history">
+                  <div class="dropdown">
+                      <details>
+                            
+                        <summary>To: Ashi  &ensp; Sub: Internship   &ensp; Date: 01/10/2021 </summary>  
+                        <div class="mail">
+                                            
+                          <p>From: Name</p>
+                          <p>Sent: 01 December 2020 12:00PM</p>
+                          <p>To: EmailAddress</p>
+                          <p>Subject: XYZ</p>
+                          <p>
+                            &ensp; &ensp; &ensp; Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Maxime libero ex obcaecati ea facilis tempora
+                            quibusdam asperiores accusamus consequatur dicta!
+                          </p>
+                          <a href="attachment.com" id="attachement"> Attachment File </a>
+                        </div>
+                      </details>
+
+                  </div>
+              </div>
+            </ul>  
+                
+              
+          </div>
   </div>
   
   

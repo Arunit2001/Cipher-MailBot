@@ -7,7 +7,9 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+const Email = require("./models/email");
 const Auth = require("./routes/auth");
+const email = require("./routes/email");
 const {MongoClient} = require("mongodb");
 const isNotLoggedIn = require("./middlewares/isNotLoggedIn");
 const isLoggedIn = require("./middlewares/isLoggedIn.js");
@@ -68,6 +70,8 @@ app.get("/dashboard/create", isLoggedIn, verifyToken, (req, res)=>{
 })
 
 app.use("/user", Auth);
+app.use("/schedule", email);
+
 
 
 app.listen(process.env.PORT || "5000", ()=>{

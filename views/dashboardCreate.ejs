@@ -10,19 +10,21 @@
       rel="stylesheet"
     />
     <script
-      src="https://kit.fontawesome.com/7568ff1cf1.js"
-      crossorigin="anonymous"
+    src="https://kit.fontawesome.com/7568ff1cf1.js"
+    crossorigin="anonymous"
     ></script>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+    crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/styles/header.css" />
     <script src="/scripts/header.js" defer></script>
     <link rel="stylesheet" href="/styles/dashboardCreate.css" />
-    
+    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js" defer></script>
+    <script src="/scripts/dashboardCreate.js" defer></script>
   </head>
 
   <%- include('./header') %>
@@ -34,13 +36,107 @@
   </div>
   
   <div class="content">
-    <h2>Responsive Sidebar Example</h2>
-    <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
-    <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
-    <h3>Resize the browser window to see the effect.</h3>
+    <div class="container">
+      <form onsubmit="scheduleMail(event)">
+        <div class="form-group" style="width: 200px;">
+          <label for="exampleInputEmail1">To</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" name="to"  placeholder="To email" required>
+        </div>
+        <!-- <div class="form-group" style="width: 200px;">
+          <label for="exampleInputEmail2">CC</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" name="cc" placeholder="CC email">
+        </div> -->
+
+
+        <div class="control-group" id="fields">
+          <label class="control-label" for="field1">CC</label>
+          <div class="controls"> 
+              <div role="form" autocomplete="off">
+                  <div class="entry input-group" style="width: 236.5px;">
+                      <input class="form-control" name="CC[]" type="text" placeholder="Type something" />
+                    <span class="input-group-btn">
+                          <button class="btn btn-success btn-add" type="button">
+                              <span class="glyphicon"><i class="fas fa-plus"></i></span>
+                          </button>
+                      </span>
+                  </div>
+              </div>
+          </div>
+      </div>  
+
+
+        <div class="form-group" style="width: 200px;">
+          <label for="exampleInputSubject2">Subject</label>
+          <input type="string" class="form-control" id="exampleInputEmail2" name="subject" placeholder="Subject" required>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="frequency" id="inlineRadio1" value="0" checked>
+          <label class="form-check-label" for="inlineRadio1">Only Once</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="frequency" id="inlineRadio2" value="1">
+          <label class="form-check-label" for="inlineRadio2">Every 20-30 seconds</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="frequency" id="inlineRadio3" value="2">
+          <label class="form-check-label" for="inlineRadio3">Weekly</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="frequency" id="inlineRadio4" value="3">
+          <label class="form-check-label" for="inlineRadio4">Monthly</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="frequency" id="inlineRadio5" value="4">
+          <label class="form-check-label" for="inlineRadio5">Yearly</label>
+        </div>
+        <textarea name="editor1" id="content"></textarea>
+        <!-- <button class="schedule" onclick="fun()">Schedule</button> -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+                
   </div>
 
-  
+  <script>
+    CKEDITOR.replace( 'editor1' );  
+    
+    async function scheduleMail(e){
+      e.preventDefault();
+      var x = CKEDITOR.instances.content.getData();
+      let cc = [];
+      let k = document.getElementsByName("CC[]");
+      k.forEach((element)=>{
+        let obj = {};
+        obj["email"] = element.value;
+        cc.push(obj);
+      })
+      let data = {
+        to : e.currentTarget.elements['to'].value,
+        cc : cc,
+        subject : e.currentTarget.elements['subject'].value,
+        content : x,
+        frequency : e.currentTarget.elements['frequency'].value
+      }
+      // console.log(data);
+      await fetch("http://localhost:5000/schedule/email",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
+      }).then(async (response)=>{
+        // response = await response.json();
+        if(response.status>=200&&response.status<300){
+          window.location.href="http://localhost:5000/dashboard/home";
+        }else{
+          console.log("error happened");
+        }
+      }).catch((error)=>{
+        console.log(error.message);
+      })
+    }
+</script>
 </body>
 
 </html>
