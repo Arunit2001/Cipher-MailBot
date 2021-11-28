@@ -68,8 +68,10 @@
                 </button>
               </div>
         </div> -->
-
-        <% let arr = ["Only Once", "Every 20-30 sec", "Weekly", "Monthly", "Yearly"]; %>
+            <% if(scheduleEmail.length==0){ %>
+              <h1>Currently No Mail is scheduled.</h1>
+            <% } %>
+        <% let arr = ["Only Once", "Every 20-30 sec", "Weekly", "Monthly", "Yearly", "Scheduled at specific Time"]; %>
 
             <ul>
               <% scheduleEmail.forEach((elements)=>{ %>

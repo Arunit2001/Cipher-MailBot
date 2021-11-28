@@ -41,6 +41,10 @@
     font-size: 12px;
 }
 
+#special {
+  display: none;
+}
+
   @media screen and (max-width: 700px) {
     .sidebar {
       width: 100%;

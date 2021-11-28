@@ -83,7 +83,7 @@ app.get("/dashboard/history", isLoggedIn, verifyToken, async (req, res)=>{
   })
 })
 app.get("/dashboard/create", isLoggedIn, verifyToken, (req, res)=>{
-  res.render("dashboardCreate.ejs");
+  res.render("dashboardCreate.ejs", {moment : moment});
 })
 
 

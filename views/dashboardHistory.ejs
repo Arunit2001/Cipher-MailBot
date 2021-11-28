@@ -68,7 +68,9 @@
                 </button>
               </div>
         </div> -->
-
+            <% if(emailArr.length==0){ %>
+              <h1>You don't have any mail history.</h1>
+            <% } %>
             <ul>
               <% emailArr.forEach((elements)=>{ %>
                 <li>
@@ -83,13 +85,17 @@
                             <p><b>Sent:</b> &nbsp;<%= elements.createdAt %></p>
                             <p><b>To:</b> &nbsp;<%= elements.to %></p>
                             <p><b>Sub:</b> &nbsp;<%= elements.subject %></p>
-                            <p><b>CC:</b>
-                              <% elements.cc.forEach((ele)=>{ %>
-                                <%= ele.email %>,&nbsp;
-                              <% }) %>
-                            </p>
+                            <% if(elements.cc.length>0){ %>
+                              <p><b>CC:</b>
+                                <% elements.cc.forEach((ele)=>{ %>
+                                  <%= ele.email %>,&nbsp;
+                                <% }) %>
+                              </p>
+                            <% } %>
                             <div style="margin-left: 50px;">
-                              <%- elements.content %>
+                              <p><b>Body : </b>
+                                <%- elements.content %>
+                              </p>
                             </div>
                             <!-- <a href="attachment.com" id="attachement"> Attachment File </a> -->
                           </div>
