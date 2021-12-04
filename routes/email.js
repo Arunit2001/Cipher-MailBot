@@ -33,7 +33,7 @@ router.post('/email', isLoggedIn, verifyToken, async (req, res)=>{
             subject : req.body.subject,
             content : req.body.content,
             frequency : req.body.frequency,
-            recurring : (req.body.frequency==0 || req.body.frequency==5) ? false : true,
+            recurring : (req.body.frequency==0) ? false : true,
             createdAt : new Date().toLocaleString()
         }
 
@@ -208,6 +208,8 @@ router.post('/email', isLoggedIn, verifyToken, async (req, res)=>{
                                 if(err){
                                     console.log(err);
                                 }
+                                email.recurring = false;
+                                email.save();
                                 console.log("history created...");
                                 count++;
                                 if(count==1){
@@ -254,7 +256,7 @@ router.post('/email/edit/:id', isLoggedIn, verifyToken, isOwner, async (req, res
             subject : req.body.subject,
             content : req.body.content,
             frequency : req.body.frequency,
-            recurring : (req.body.frequency==0 || req.body.frequency==5)? false : true,
+            recurring : (req.body.frequency==0)? false : true,
             createdAt : new Date().toLocaleString()
         }
 
@@ -416,6 +418,39 @@ router.post('/email/edit/:id', isLoggedIn, verifyToken, isOwner, async (req, res
                             });
                             });
                     })
+                }else if(frequency==5){
+                    var DELAY = req.body.delay;
+                    console.log("delay = ", DELAY);
+                    setTimeout(function(){
+                        SG.send(msg)
+                            .then(async (r) => {
+                            console.log("email sent...");
+                            email.recurring = false;
+                            email.save();
+                            info.createdAt = new Date().toLocaleString();
+                            await History.create(info, (err, history)=>{
+                                if(err){
+                                    console.log(err);
+                                }
+                                console.log("history created...");
+                                count++;
+                                if(count==1){
+                                    return res.json({
+                                        success: true,
+                                        message: "email sent successfully",
+                                        // user_id: user.dataValues.id,
+                                    });
+                                }
+                              })
+                            })
+                            .catch((error) => {
+                            console.log("email not sent...", error);
+                            return res.json({
+                                success: false,
+                                message: error.message,
+                            });
+                            });
+                    }, DELAY);
                 }
         })
 
